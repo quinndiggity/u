@@ -1,16 +1,25 @@
 //eval an Array of Strings
 _raw = {
   f(as, env) {
+    return ['all', ..._raw.as(as, env)]
+  },
+  fn(as, env) {
+    return ['none', ..._raw.as(as, env)]
+  },
+  fa(as, env) {
+    return ['alt', ..._raw.as(as, env)]
+  },
+  _a(as, env) {
+    return as.map(s => i_exp(s, env))
+  },
+  as(as, env) {
     return as.map(x => {
       if (isa(x))
         return x[0] == ','
           ? i_exp(x.slice(1), env)
-          : _raw.f(x)
+          : _raw.as(x)
       return x
     })
-  },
-  _a(as, env) {
-    return as.map(s => i_exp(s, env))
   },
   _o(as, env) {
     let or = Object.create(null)
@@ -65,27 +74,27 @@ _raw = {
       }
     }
   },
-  ['?'](as, env) {
+  if(as, env) {
     env.$ = i_exp(as.shift(), env)
     if (env.$)
       return i_exp(as[0], env)
     if (as.length > 1)
-      return i_progn(as.slice(1), env)
+      return i_exps(as.slice(1), env)
   },
-  ['u?'](as, env) {
+  ifu(as, env) {
     env.$ = i_exp(as.shift(), env)
     if (env.$ === undefined)
       return i_exp(as[0], env)
     if (as.length > 1)
-      return i_progn(as.slice(1), env)
+      return i_exps(as.slice(1), env)
   },
-  p(as, env) {
-    return i_progn(as, env)
+  do(as, env) {
+    return i_exps(as, env)
   },
-  t(as, env) {
+  text(as, env) {
     return as.map(x => x[0] == ',' ? i_str(x.slice(1), env) : x).join(' ')
   },
-  e([seq, exp], env) {
+  each([seq, exp], env) {
     seq = i_exp(seq, env)
     exp = i_exp(exp, env)
     if (iso(seq))

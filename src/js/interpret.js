@@ -1,7 +1,7 @@
 //Interpret expression
-i_text = x => i_progn(parse(x))
+i_text = x => i_exps(parse(x))
 
-i_progn = (progn, env) => {
+i_exps = (progn, env) => {
   let ret
   for (let i = 0; i < progn.length; i++) {
     let exp = progn[i]
@@ -9,8 +9,6 @@ i_progn = (progn, env) => {
       return i_exp(exp, env)
     if (isa(exp))
       ret = i_exp(exp, env)
-    else
-      console.log('i_progn', exp)
   } 
   return ret
 }
@@ -44,7 +42,7 @@ i_infix = (str, env) => {
   }
 }
 //interpret array
-i_arr = ([x,...args], env) => {
+i_arr = ([x, ...args], env) => {
   let fx = _raw[x]
   if (fx)
     return fx(args, env)
@@ -53,19 +51,17 @@ i_arr = ([x,...args], env) => {
     return i_exp(args[0], env)
   if (x == false)
     return i_exp(args.slice(1), env)
-  args = args.map(arg => i_exp(arg, env))
   if (isf(x))
-    return x(...args)
+    return x(...args.map(arg => i_exp(arg, env)))
   if (isa(x))
     return i_args(args, x, env)
 }
 
-i_args = (args, exp, env) => {
-  let _env = { _env: env }
-  let progn = exp.slice(0)
+i_args = (args, [str, ...progn], env) => {
+  let params = []
   while (progn.length > 1 && !isa(progn[0]))
-    _env[progn.shift()] = args.shift()
-  if (args.length) _env.$ = args
-  return i_progn(progn, _env)
+    params.push(progn.shift())
+  let _env = { _env: env }
+  _assign[str](params, args, _env)
+  return i_exps(progn, _env)
 }
-
