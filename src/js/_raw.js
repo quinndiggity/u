@@ -1,11 +1,11 @@
 //eval an Array of Strings
-_eval_as = {
+_raw = {
   f(as, env) {
     return as.map(x => {
       if (isa(x))
         return x[0] == ','
           ? i_exp(x.slice(1), env)
-          : envRaw.f(x)
+          : _raw.f(x)
       return x
     })
   },
@@ -34,16 +34,16 @@ _eval_as = {
   s(as, env) {
     e2(as, (s1, s2) => {
       if (iss(s1))
-        i_env.set(s1, env, i_exp(s2, env))
+        enviroment.set(s1, env, i_exp(s2, env))
     })
   },
   let(as, env) {
     e2(as, (s1, s2) => {
-      i_env.let(s1, env, i_exp(s2, env))
+      enviroment.let(s1, env, i_exp(s2, env))
     })
   },
   delete(as, env) {
-    e(as, key => i_env.del(key, env))
+    e(as, key => enviroment.del(key, env))
   },
   fm(as) {
     as.unshift('m')

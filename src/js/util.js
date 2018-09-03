@@ -9,10 +9,11 @@ e2 = function (x, fn) {
     fn(x[i], x[i+1], i/2)
   }
 }
-// is object|string|function|array|integer|number
+// is object|string|function|array|integer|number|undefined
 iso = x => Object.prototype.toString.call(x) == "[object Object]"
 iss = x => typeof x == 'string'
 isf = x => typeof x == 'function'
 isa = Array.isArray
 isi = Number.isInteger
 isn = x => !isNaN(x)
+isu = x => x === undefined

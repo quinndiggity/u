@@ -1,6 +1,7 @@
 //root|global object|env
-_root = {
+envRoot = {
   isf, iss, isa, iso, isn, isi,
+  true: true, false: false, undefined: undefined, null: null,
   log: console.log,
   '+'(...a) {
     if (isa(a[0])) a = a[0]
@@ -15,19 +16,19 @@ _root = {
     while (--i && a[0] === a[i]);
     return i > 0 ? false : true
   },
-  '!=': (...a) => !_root['='](...a),
+  '!=': (...a) => !envRoot['='](...a),
   '<': (...a) => {
     i = a.length
     while (--i && a[i] > a[i - 1]);
     return i == 0 ? true : false
   },
-  '>=': (...a) => !_root['<'](...a),
+  '>=': (...a) => !envRoot['<'](...a),
   '>': (...a) => {
     i = a.length
     while (--i && a[i] < a[i - 1]);
     return i == 0 ? true : false
   },
-  '<=': (...a) => !_root['>'](...a),
+  '<=': (...a) => !envRoot['>'](...a),
   str: (...a) => a.join(' '),
   clone: x => JSON.parse(JSON.stringify(x)),
   assign: (o1, target) => Object.assign(target || {}, o1),
