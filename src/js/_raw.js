@@ -91,23 +91,14 @@ _raw = {
   do(as, env) {
     return i_exps(as, env)
   },
-  text(as, env) {
+  for([xn, ...exps], env) {
+    let _env = { _env: env }
+    for (let i = 0; i < i_exp(xn, env); i++) {
+      _env.$ = i
+      i_exps(exps, _env)
+    }
+  },
+  join(as, env) {
     return as.map(x => x[0] == ',' ? i_str(x.slice(1), env) : x).join(' ')
-  },
-  each([seq, exp], env) {
-    seq = i_exp(seq, env)
-    exp = i_exp(exp, env)
-    if (iso(seq))
-      e(Object.keys(seq), key => {
-        i_args([seq[key], key], exp, env)
-      })
-    else
-      for (let i = 0; i < seq.length; i++)
-        i_args([seq[i], i], exp, env)
-  },
-  map([seq, exp], env) {
-    return i_exp(seq, env).map((x, i) => {
-      return i_args([x, i], i_exp(exp, env), env)
-    })
   }
 }
