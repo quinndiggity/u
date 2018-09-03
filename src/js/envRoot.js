@@ -1,5 +1,6 @@
 //root|global object|env
 envRoot = {
+  global: global||window,
   isf, iss, isa, iso, isn, isi,
   true: true, false: false, undefined: undefined, null: null,
   log: console.log,
