@@ -1,13 +1,20 @@
 //eval an Array of Strings
+function closure(assignKey, as, env) {
+  let params = []
+  let exps = _raw.as(as, env)
+  while (exps.length > 1 && !isa(exps[0]))
+    params.push(exps.shift())
+  return [{ _env: env }, assignKey, params, exps]
+}
 _raw = {
   f(as, env) {
-    return ['all', ..._raw.as(as, env)]
+    return closure('all', as, env)
   },
   fn(as, env) {
-    return ['none', ..._raw.as(as, env)]
+    return closure('none', as, env)
   },
   fo(as, env) {
-    return ['odd', ..._raw.as(as, env)]
+    return closure('odd', as, env)
   },
   _a(as, env) {
     return as.map(s => i_exp(s, env))
@@ -15,9 +22,7 @@ _raw = {
   as(as, env) {
     return as.map(x => {
       if (isa(x))
-        return x[0] == ','
-          ? i_exp(x.slice(1), env)
-          : _raw.as(x)
+        return _raw.as(x)
       return x
     })
   },

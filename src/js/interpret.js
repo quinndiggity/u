@@ -1,10 +1,10 @@
 //Interpret expression
-i_text = x => i_exps(parse(x))
+i_text = x => i_exps(parse(x), envRoot)
 
-i_exps = (progn, env) => {
+i_exps = (exps, env) => {
   let ret
-  for (let i = 0; i < progn.length; i++) {
-    let exp = progn[i]
+  for (let i = 0; i < exps.length; i++) {
+    let exp = exps[i]
     if (iss(exp))
       return i_exp(exp, env)
     if (isa(exp))
@@ -13,7 +13,7 @@ i_exps = (progn, env) => {
   return ret
 }
 
-i_exp = (exp, env = envRoot) => {
+i_exp = (exp, env) => {
   if (iss(exp))
     return i_str(exp, env)
   if (isa(exp))
@@ -57,11 +57,8 @@ i_arr = ([x, ...args], env) => {
     return i_args(args, x, env)
 }
 
-i_args = (args, [str, ...progn], env) => {
-  let params = []
-  while (progn.length > 1 && !isa(progn[0]))
-    params.push(progn.shift())
-  let _env = { _env: env }
-  _assign[str](params, args, _env)
-  return i_exps(progn, _env)
+i_args = (args, [_env, assignKey, params, exps], env) => {
+  _assign[assignKey](params.slice(0), args, _env, env)
+  return i_exps(exps, _env)
 }
+ 
