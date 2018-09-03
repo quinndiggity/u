@@ -6,8 +6,8 @@ _raw = {
   fn(as, env) {
     return ['none', ..._raw.as(as, env)]
   },
-  fa(as, env) {
-    return ['alt', ..._raw.as(as, env)]
+  fo(as, env) {
+    return ['odd', ..._raw.as(as, env)]
   },
   _a(as, env) {
     return as.map(s => i_exp(s, env))
