@@ -1,9 +1,9 @@
 //root|global object|env
 envRoot = {
-  global: global||window,
+  js: global || window,
+  log: console.log,
   isf, iss, isa, iso, isn, isi,
   true: true, false: false, undefined: undefined, null: null,
-  log: console.log,
   '+'(...a) {
     if (isa(a[0])) a = a[0]
     return a.reduce((b, c) => b + c)
