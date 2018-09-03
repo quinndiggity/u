@@ -3,6 +3,7 @@ envRoot = {
   js: global || window,
   log: console.log,
   keys: Object.keys,
+  require,
   isf, iss, isa, iso, isn, isi,
   true: true, false: false, undefined: undefined, null: null,
   '+'(...a) {
