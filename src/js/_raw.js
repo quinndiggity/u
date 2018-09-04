@@ -16,6 +16,13 @@ _raw = {
   fo(as, env) {
     return closure('odd', as, env)
   },
+  fj(as, env) {
+    let [_env, _, params, exps] = closure('all', as, env)
+    return (...args) => {
+      e(params, (param,i) => _env[param] = args[i] )
+      return i_exps(exps, _env)
+    }
+  },
   _a(as, env) {
     return as.map(s => i_exp(s, env))
   },
