@@ -63,6 +63,9 @@ _raw = {
       enviroment.set(i_exp(s1, env), envRoot, i_exp(s2, env))
     )
   },
+  s_add([name, val], env) {
+    enviroment.set(name, env, i_exp(name, env) + i_exp(val, env))
+  },
   let(as, env) {
     e2(as, (s1, s2) => {
       enviroment.let(s1, env, i_exp(s2, env))

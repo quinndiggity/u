@@ -33,8 +33,10 @@ envRoot = {
   },
   '<=': (...a) => !envRoot['>'](...a),
   str: (...a) => a.join(' '),
+  lowercase: str => str.toLowerCase(),
   clone: x => JSON.parse(JSON.stringify(x)),
   assign: (o1, target) => Object.assign(target || {}, o1),
+  has: (x, arr) => arr.indexOf(x) > -1,
   ppend: (x, arr) => arr.unshift(x),
   apend: (x, arr) => arr.push(x),
   innerHTML(html, id) {
