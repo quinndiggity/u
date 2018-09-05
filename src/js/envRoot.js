@@ -1,11 +1,11 @@
 //root|global object|env
 envRoot = {
+  require, isf, iss, isa, iso, isn, isi,
   js: global || window,
   log: console.log,
   keys: Object.keys,
-  require,
-  isf, iss, isa, iso, isn, isi,
   true: true, false: false, undefined: undefined, null: null,
+  return: '⏎⏎',
   '+'(...a) {
     if (isa(a[0])) a = a[0]
     return a.reduce((b, c) => b + c)
