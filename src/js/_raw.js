@@ -63,7 +63,7 @@ _raw = {
       enviroment.set(i_exp(s1, env), envRoot, i_exp(s2, env))
     )
   },
-  s_add([name, val], env) {
+  's+'([name, val], env) {
     enviroment.set(name, env, i_exp(name, env) + i_exp(val, env))
   },
   let(as, env) {
