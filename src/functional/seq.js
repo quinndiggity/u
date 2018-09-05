@@ -13,4 +13,16 @@ reduce (f ret seq exp
   ))
   ret
 )
+map (f seq exp (m seq
+  isa (do
+    (s ret [])
+    (for seq.length (apend (exp seq,$ $) ret))
+    ret
+  )
+  iso (do
+    (s ret {} ak (keys seq))
+    (for ak.length (s key ak,$ ret,key (exp seq,key key)))
+    ret
+  )
+))
 )`)

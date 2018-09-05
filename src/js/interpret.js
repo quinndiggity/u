@@ -9,9 +9,9 @@ i_exps = (exps, env) => {
       return i_exp(exp, env)
     if (isa(exp))
       ret = i_exp(exp, env)
-    if (ret == '⏎⏎')
+    if (ret === '⏎⏎')
       return
-  } 
+  }
   return ret
 }
 
