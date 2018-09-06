@@ -23,6 +23,10 @@ _raw = {
       return i_exps(exps, _env)
     }
   },
+  fm(as, env) {
+    as.unshift('m')
+    return closure('all', [as[1], as], env)
+  },
   _a(as, env) {
     return as.map(s => i_exp(s, env))
   },
@@ -70,10 +74,6 @@ _raw = {
     e2(as, (s1, s2) => {
       enviroment.let(s1, env, i_exp(s2, env))
     })
-  },
-  fm(as) {
-    as.unshift('m')
-    return [as[1], as]
   },
   m([s, ...cond], env) {
     xs = i_exp(s, env)
