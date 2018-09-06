@@ -4,7 +4,7 @@ function closure(assignKey, as, env) {
   let exps = _raw.as(as, env)
   while (exps.length > 1 && !isa(exps[0]))
     params.push(exps.shift())
-  return [{ _env: env }, assignKey, params, exps]
+  return [env, assignKey, params, exps]
 }
 _raw = {
   f(as, env) {

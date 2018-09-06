@@ -60,7 +60,7 @@ i_arr = ([x, ...args], env) => {
 }
 
 i_args = (args, [_env, assignKey, params, exps], env) => {
-  _assign[assignKey](params.slice(0), args, _env, env)
-  return i_exps(exps, _env)
+  let envLocal = {_env}
+  _assign[assignKey](params.slice(0), args, envLocal, env)
+  return i_exps(exps, envLocal)
 }
- 
