@@ -1,5 +1,5 @@
 require('../js')
 require('../functional')
-require('../library')
+require('../view')
 require('./onkeydown.u')
 require('./db.u')
