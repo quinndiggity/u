@@ -47,12 +47,5 @@ enviroment = {
   set(str, obj, val) {
     let keys = enviroment.parse(str, obj)
     return enviroment.resolve(keys, obj)[keys.pop()] = val
-  },
-  del(str, obj) {
-    let keys = enviroment.parse(str, obj),
-      env = enviroment.resolve(keys, obj),
-      key = keys.pop()
-    if (env[key] !== undefined)
-      delete env[key]
   }
 }

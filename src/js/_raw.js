@@ -71,10 +71,6 @@ _raw = {
       enviroment.let(s1, env, i_exp(s2, env))
     })
   },
-  delete([seq, ...keys], env) {
-    seq = i_exp(seq, env)
-    e(keys, key => delete seq[key])
-  },
   fm(as) {
     as.unshift('m')
     return [as[1], as]
