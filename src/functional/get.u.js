@@ -5,7 +5,7 @@ prop (f key obj
 last (f arr
   (g arr arr.length-1)
 )
-take (f seq keys
+take (f keys seq
   (s ret (m seq isa [] iso {}))
   (each keys (f key (ifu seq,key 0
     (s ret,key seq,key)
