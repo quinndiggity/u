@@ -10,12 +10,19 @@ css {
   }
   abbr (os
     b background
+    bs border-style
+    bw border-width
+    bc border-color
     c color
     d display
     f fontsize
     h height
     m margin
+    p padding
+    pl padding-left
+    pr padding-right
     w width
+    ta text-align
   )
 }
 html {
