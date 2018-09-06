@@ -3,7 +3,7 @@ _escapeChar = {
 }
 
 _prefix = {
-  "|": s => escapeChar[s],
+  "|": s => _escapeChar[s],
   "'": s => s,
   '!': (s, env) => !i_str(s, env),
   ':': s => new Date(s),
