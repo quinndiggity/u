@@ -3,10 +3,10 @@ css {
   theme {
     px 1 bs 'solid
     s0 12 s1 16 s2 20 s3 24
-    c0 '#151515 c1 '#ac4142 c2 '#90a959 c3 '#f4bf75
-    c4 '#6a9fb5 c5 '#aa759f c6 '#75b5aa c7 '#d0d0d0
-    c8 '#505050 c9 '#ac4142 ca '#90a959 cb '#f4bf75
-    cc '#6a9fb5 cd '#aa759f ce '#75b5aa cf '#f5f5f5
+    c0 '#2d2d2d c1 '#f2777a c2 '#99cc99 c3 '#ffcc66
+    c4 '#6699cc c5 '#cc99cc c6 '#66cccc c7 '#d3d0c8
+    c8 '#747369 c9 '#f2777a ca '#99cc99 cb '#ffcc66
+    cc '#6699cc cd '#cc99cc ce '#66cccc cf '#f2f0ec
   }
   abbr (os
     bg background
