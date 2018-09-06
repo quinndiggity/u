@@ -9,12 +9,13 @@ css {
     cc '#6699cc cd '#cc99cc ce '#66cccc cf '#f2f0ec
   }
   abbr (os
-    bg background
+    b background
+    c color
+    d display
+    f fontsize
+    h height
     m margin
     w width
-    h height
-    c color
-    f fontsize
   )
 }
 html {
@@ -30,7 +31,7 @@ html {
        ))
        sStyle (if sStyle (+ 'style=" sStyle '") ')
     )
-    (+ '< tag |s sAttr sStyle '> innerHtml '< tag '/>)
+    (+ '< tag |s sAttr sStyle '> innerHtml '</ tag '>)
   )
   g_node (f obj
     (s tag (ifu obj.tag 'div $)
@@ -43,8 +44,8 @@ html {
   )
   g_tree (fm tree
     isa (do
-      (s node tree.0 node.i (+ (map tree^1 html.g_tree)))
-      (html.g_node node) 
+      (s node (assign tree.0) node.i (+ (map tree^1 html.g_tree)))
+      (html.g_node node)
     )
     iso (html.g_node tree)
   )
