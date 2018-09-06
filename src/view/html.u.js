@@ -3,8 +3,8 @@ css {
   theme {
     px 1 bs 'solid
     s0 12 s1 16 s2 20 s3 24
-    c0 '#2d2d2d c1 '#f2777a c2 '#99cc99 c3 '#ffcc66
-    c4 '#6699cc c5 '#cc99cc c6 '#66cccc c7 '#d3d0c8
+    c0 '#2b303b c1 '#bf616a c2 '#a3be8c c3 '#ebcb8b
+    c4 '#8fa1b3 c5 '#b48ead c6 '#96b5b4 c7 '#c0c5ce
     c8 '#747369 c9 '#f2777a ca '#99cc99 cb '#ffcc66
     cc '#6699cc cd '#cc99cc ce '#66cccc cf '#f2f0ec
   }
