@@ -119,7 +119,7 @@ _raw = {
       i_exps(exps, _env)
     }
   },
-  join(as, env) {
+  str(as, env) {
     return as.map(x => x[0] == ',' ? i_str(x.slice(1), env) : x).join(' ')
   }
 }

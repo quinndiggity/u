@@ -32,7 +32,6 @@ envRoot = {
     return i == 0 ? true : false
   },
   '<=': (...a) => !envRoot['>'](...a),
-  str: (...a) => a.join(' '),
   lowercase: str => str.toLowerCase(),
   clone: x => JSON.parse(JSON.stringify(x)),
   assign: (o1, target) => Object.assign(target || {}, o1),
