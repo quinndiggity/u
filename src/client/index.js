@@ -1,3 +1,4 @@
 require('../js')
 require('../functional')
-require('./onkeydown.u')require('./db.u')
+require('../library')
+require('./onkeydown.u')
