@@ -34,6 +34,7 @@ envRoot = {
   '<=': (...a) => !envRoot['>'](...a),
   lowercase: str => str.toLowerCase(),
   delete(seq, ...keys) { e(keys, key => delete seq[key]) },
+  merge: (...a) => a.reduce((ret,arr)=> [...ret, ...arr]),
   clone: x => JSON.parse(JSON.stringify(x)),
   assign: (o1, target) => Object.assign(target || {}, o1),
   has: (x, arr) => arr.indexOf(x) > -1,
