@@ -12,29 +12,34 @@ envRoot = {
   },
   '-': (...a) => a.reduce((b, c) => b - c),
   '*': (...a) => a.reduce((b, c) => b * c),
-  '/': (...a) => a.reduce((b, c) => b / c),
+  '÷': (...a) => a.reduce((b, c) => b / c),
   '%': (...a) => a.reduce((b, c) => b % c),
   '&': (...a) => a.reduce((b, c) => b && c),
   '|': (...a) => a.reduce((b, c) => b || c),
+  '^': (...a) => a.reduce((b, c) => b.slice(c)),
   '=': (...a) => {
     i = a.length
     while (--i && a[0] === a[i]);
     return i > 0 ? false : true
   },
   '!=': (...a) => !envRoot['='](...a),
+  '≠': (...a) => !envRoot['='](...a),
   '<': (...a) => {
     i = a.length
     while (--i && a[i] > a[i - 1]);
     return i == 0 ? true : false
   },
   '>=': (...a) => !envRoot['<'](...a),
+  '≥': (...a) => !envRoot['<'](...a),
   '>': (...a) => {
     i = a.length
     while (--i && a[i] < a[i - 1]);
     return i == 0 ? true : false
   },
   '<=': (...a) => !envRoot['>'](...a),
+  '≤': (...a) => !envRoot['>'](...a),
   '!': x => !x,
+  '/': (...a) => a.reduce((b, c) => b[c]),
   lowercase: str => str.toLowerCase(),
   delete(seq, ...keys) { e(keys, key => delete seq[key]) },
   merge: (...a) => a.reduce((ret,arr)=> [...ret, ...arr]),

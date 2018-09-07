@@ -33,16 +33,18 @@ i_str = (str, env) => {
   return enviroment.get(str, env)
 }
 
-let reInfix = new RegExp(`[${Object.keys(_infix).join('').replace('-', '\\-')}]`)
+_reInfix = /[\-+*÷%=≠<>≤≥&|^/]/
+
 i_infix = (str, env) => {
-  let matched = str.match(reInfix)
+  let matched = str.match(_reInfix)
   if (matched) {
     let i = matched.index,
       a = i_str(str.slice(0, i), env),
       b = i_str(str.slice(i + 1), env)
-    return _infix[matched[0]](a, b)
+    return envRoot[matched[0]](a, b)
   }
 }
+
 //interpret array
 i_arr = ([x, ...args], env) => {
   let fx = _raw[x]
