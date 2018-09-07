@@ -5,7 +5,7 @@ css {
     s0 12 s1 16 s2 20 s3 24
     c0 '#2b303b c1 '#bf616a c2 '#a3be8c c3 '#ebcb8b
     c4 '#8fa1b3 c5 '#b48ead c6 '#96b5b4 c7 '#c0c5ce
-    c8 '#747369 c9 '#f2777a ca '#99cc99 cb '#ffcc66
+    c8 '#373B41 c9 '#f2777a ca '#99cc99 cb '#ffcc66
     cc '#6699cc cd '#cc99cc ce '#66cccc cf '#f2f0ec
   }
   abbr (os
@@ -16,12 +16,14 @@ css {
     c color
     d display
     f fontsize
-    h height
     m margin
     p padding
     pl padding-left
     pr padding-right
-    w width
+    h height
+    w width 
+    wn min-width 
+    wx max-width
     ta text-align
   )
 }
@@ -34,6 +36,8 @@ html {
             cssVal (prop val css.theme))
          (if (isn cssVal)
              (s cssVal (+ cssVal*css.theme.px 'px)))
+         (if cssVal.0=',
+             (s cssVal cssVal^1))
          (+ ret cssKey ': cssVal ';)
        ))
        sStyle (if sStyle (+ 'style=" sStyle '") ')
