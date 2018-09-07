@@ -41,8 +41,8 @@ envRoot = {
   clone: x => JSON.parse(JSON.stringify(x)),
   assign: (o1, target) => Object.assign(target || {}, o1),
   has: (x, arr) => arr.indexOf(x) > -1,
-  ppend: (x, arr) => arr.unshift(x),
-  apend: (x, arr) => arr.push(x),
+  ppend(x, arr) { arr.unshift(x); return arr },
+  apend(x, arr) { arr.push(x); return arr },
   innerHTML(html, id) {
     document.getElementById(id || 'app').innerHTML = html
   }
