@@ -1,53 +1,39 @@
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
-
-http.createServer(function (request, response) {
-  console.log('request ', request.url);
-
-  var filePath = '.' + request.url;
-  if (filePath == './') {
-    filePath = './client/index.html';
+require('http').createServer((req, res) => {
+  if (req.url == "/") {
+    res.writeHead(200, { "Content-Type": "text/html" })
+    res.end(fs.readFileSync("./dist/index.html"))
   }
-
-  var extname = String(path.extname(filePath)).toLowerCase();
-  var mimeTypes = {
-    '.html': 'text/html',
-    '.js': 'text/javascript',
-    '.css': 'text/css',
-    '.json': 'application/json',
-    '.png': 'image/png',
-    '.jpg': 'image/jpg',
-    '.gif': 'image/gif',
-    '.wav': 'audio/wav',
-    '.mp4': 'video/mp4',
-    '.woff': 'application/font-woff',
-    '.ttf': 'application/font-ttf',
-    '.eot': 'application/vnd.ms-fontobject',
-    '.otf': 'application/font-otf',
-    '.svg': 'application/image/svg+xml'
-  };
-
-  var contentType = mimeTypes[extname] || 'application/octet-stream';
-
-  fs.readFile(filePath, function (error, content) {
-    if (error) {
-      if (error.code == 'ENOENT') {
-        fs.readFile('./404.html', function (error, content) {
-          response.writeHead(200, { 'Content-Type': contentType });
-          response.end(content, 'utf-8');
-        });
+  else if (req.url.substr(-3) == '.js') {
+    res.writeHead(200, { "Content-Type": "text/javascript" })
+    res.end(fs.readFileSync('./dist/' + req.url))
+  }
+  else if (req.method == "POST") {
+    let data = ""
+    req.on("data", chunk => { data += chunk })
+    req.on("end", () => {
+      data = JSON.parse(data)
+      res.writeHead(200)
+      if (data.shift) {
+        let name = data.shift()
+        res.end(post[name](...data) || '""')
       }
       else {
-        response.writeHead(500);
-        response.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
-        response.end();
+        res.end('"not array"')
       }
-    }
-    else {
-      response.writeHead(200, { 'Content-Type': contentType });
-      response.end(content, 'utf-8');
-    }
-  });
-
-}).listen(3123);
+    })
+  }
+  else if (req.url == '/sse') {
+    res.writeHead(200, {
+      'Content-Type': "text/event-stream",
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive'
+    })
+    let interval = setInterval(() => {
+      res.write(`event:sse\ndata:${new Date()}\n\n`)
+    }, 3000)
+    req.on('close', () => {
+      clearInterval(interval)
+      res.end()
+    })
+  }
+}).listen(3434)

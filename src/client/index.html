@@ -7,18 +7,20 @@
 
 <body style="height:100%; margin:0;">
   <div id="app" style="height:100%"></div>
-  <div style="overflow:hidden; height:0; position: fixed;"><textarea id="textarea"></textarea></div>
+  <div id="popup"></div>
+  <div id="hidden" style="overflow:hidden; height:0; position: fixed;">
+    <textarea id="textarea"></textarea>
+  </div>
 </body>
 
 <script src="./index.js"></script>
 
-<script>
-  textarea = document.getElementById("textarea")
-  textarea.onkeyup = e => {
-      if (textarea.value) {
-        textarea.value = ''
-      }
-    }
-</script>
-
 </html>
+
+<style>
+body {font-family: "Lucida Console", Monaco, monospace;}
+#cursor { animation: blink 1s infinite; }
+@keyframes blink{ to{ opacity:.0; } }
+.relative { position: relative; }
+.scroll { overflow: scroll; }
+</style>

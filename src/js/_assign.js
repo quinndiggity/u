@@ -2,8 +2,16 @@ _assign = {
   all(params, args, _env, env) {
     while (params.length && args.length)
       _env[params.shift()] = i_exp(args.shift(), env)
-    if (args.length)
+    let len = args.length
+    if (len > 1)
       _env.$ = args.map(arg => i_exp(arg, env))
+    if (len == 1) {
+      let arg = i_exp(args[0], env)
+      if (iso(arg))
+        e(Object.keys(arg), key => _env[key] = arg[key])
+      else
+        _env.$ = arg
+    }
   },
   none(params, args, _env) {
     while (params.length && args.length)

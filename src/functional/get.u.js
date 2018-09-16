@@ -13,5 +13,15 @@ take (f keys seq
   )))
   ret
 )
-
+all_keys (f obj ret parentKey
+  (ifu ret (s ret []))
+  (each obj (f val key
+    (s fullKey (if parentKey (+ parentKey '. key) key ))
+    (if (iso val)
+      (all_keys val ret fullKey)
+      (push fullKey ret)
+    )
+  ))
+  ret
+)
 )`)

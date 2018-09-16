@@ -7,6 +7,9 @@ function closure(assignKey, as, env) {
   return [env, assignKey, params, exps]
 }
 _raw = {
+  l(as, env) {
+    e(as, exp => console.log(exp, ':', i_exp(exp, env)))
+  },
   f(as, env) {
     return closure('all', as, env)
   },
@@ -19,9 +22,12 @@ _raw = {
   fj(as, env) {
     let [_env, _, params, exps] = closure('all', as, env)
     return (...args) => {
-      e(params, (param,i) => _env[param] = args[i] )
+      e(params, (param, i) => _env[param] = args[i])
       return i_exps(exps, _env)
     }
+  },
+  fv(as, env) {
+    return closure('all', as, envRoot.views)
   },
   fm(as, env) {
     as.unshift('m')
@@ -64,10 +70,10 @@ _raw = {
   },
   s_obj([obj, ...as], env) {
     obj = i_exp(obj, env)
-    e2(as, (s1, s2) => obj[s1] = i_exp(s2, env) )
+    e2(as, (s1, s2) => obj[s1] = i_exp(s2, env))
   },
   s_root(as, env) {
-    e2(as, (s1, s2) => 
+    e2(as, (s1, s2) =>
       enviroment.set(i_exp(s1, env), envRoot, i_exp(s2, env))
     )
   },
@@ -102,6 +108,18 @@ _raw = {
     if (as.length > 1)
       return i_exps(as.slice(1), env)
   },
+  ifn(as, env) {
+    env.$ = i_exp(as.shift(), env)
+    if (!env.$)
+      return i_exp(as[0], env)
+    if (as.length > 1)
+      return i_exps(as.slice(1), env)
+  },
+  ifd(as, env) {
+    env.$ = i_exp(as.shift(), env)
+    if (env.$)
+      return i_exps(as, env)
+  },
   ifu(as, env) {
     env.$ = i_exp(as.shift(), env)
     if (env.$ === undefined)
@@ -116,7 +134,9 @@ _raw = {
     let _env = { _env: env }
     for (let i = 0; i < i_exp(xn, env); i++) {
       _env.$ = i
-      i_exps(exps, _env)
+      let ret = i_exps(exps, _env)
+      if (iss(ret) && ret == '⏎⏎')
+        return
     }
   },
   str(as, env) {

@@ -1,6 +1,10 @@
 require('../js')
 require('../functional')
-require('./db.u')
-require('../view')
-require('./onkeydown.u')
+require('../system')
+require('../views')
+require('../components')
+
+envRoot.d = {
+  preset: require('../../preset/_all.json')
+}
 require('./init.u')

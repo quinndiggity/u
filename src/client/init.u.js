@@ -1,3 +1,4 @@
 i_text(`
-(render d.2)
+(load_bases)
+(set_app ['outIndex 0])
 `)

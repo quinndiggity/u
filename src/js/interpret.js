@@ -10,7 +10,7 @@ i_exps = (exps, env) => {
     if (isa(exp))
       ret = i_exp(exp, env)
     if (ret === '⏎⏎')
-      return
+      return '⏎⏎'
   }
   return ret
 }
@@ -51,9 +51,9 @@ i_arr = ([x, ...args], env) => {
   if (fx)
     return fx(args, env)
   x = i_exp(x, env)
-  if (x == true)
+  if (x === true)
     return i_exp(args[0], env)
-  if (x == false)
+  if (x === false)
     return i_exp(args.slice(1), env)
   if (isf(x))
     return x(...args.map(arg => i_exp(arg, env)))

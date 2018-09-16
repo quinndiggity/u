@@ -6,7 +6,8 @@ _prefix = {
   "|": s => _escapeChar[s],
   "'": s => s,
   '!': (s, env) => !i_str(s, env),
-  ':': s => new Date(s),
+  '-': (s, env) => -i_str(s, env),
+  ':': s => s ? new Date(s) : new Date(),
   '/': s => {
     i_2 = s.length - 2
     if (s[i_2] == '/')

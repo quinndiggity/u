@@ -1,0 +1,50 @@
+i_text(`(s
+js.onkeydown (fj e
+  (if (has e.key (as Alt Control Meta Shift)) return)
+  (ifd (or !app,focus.imap
+          (or e.altKey e.ctrlKey e.metaKey)
+          (has e.key (as Backspace Delete Enter Escape ArrowLeft ArrowRight ArrowUp ArrowDown))
+      )
+      (s cmd (abbr2cmd (event2abbr e)))
+      (if cmd (set_app (cmd app,focus)))
+      (s fuckKeyup true)
+  )
+)
+abbr2cmd (f abbr
+  (l abbr)
+  (let af app,focus
+       kmap (if af.imap 'imap 'nmap)
+       localmap af.c,kmap
+       localname (if localmap localmap,abbr)
+       cmdName (or localname root,kmap,abbr)
+  )
+  (if cmdName (or af.c,cmdName root,cmdName))
+)
+abbrMap (os acms H cms A ams C acs M acm S)
+event2abbr (f e
+  (s abbr ')
+  (if e.altKey (s+ abbr 'a))
+  (if e.ctrlKey (s+ abbr 'c))
+  (if e.metaKey (s+ abbr 'm))
+  (if e.shiftKey (s+ abbr 's))
+  (+ (prop abbr abbrMap)
+     (if e.code.0='K (lowercase e.code.3) e.code)
+  )
+)
+textarea (byid 'textarea)
+textarea.onkeyup (fj e
+  (if fuckKeyup (s fuckKeyup false)
+    (if fuckChromeIME (s fuckChromeIME false)
+      (s val textarea.value)
+      (if (& val val≠|n)
+        (set_app (app,focus.c.input val app,focus))
+      )
+    )
+  )
+  (s textarea.value ')
+)
+)
+(addEventListener textarea 'compositionupdate (fj e
+  (s fuckChromeIME true)
+))
+`)
