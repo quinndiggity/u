@@ -1,11 +1,11 @@
 require('http').createServer((req, res) => {
   if (req.url == "/") {
     res.writeHead(200, { "Content-Type": "text/html" })
-    res.end(fs.readFileSync("./dist/index.html"))
+    res.end(fs.readFileSync("./docs/index.html"))
   }
   else if (req.url.substr(-3) == '.js') {
     res.writeHead(200, { "Content-Type": "text/javascript" })
-    res.end(fs.readFileSync('./dist/' + req.url))
+    res.end(fs.readFileSync('./docs/' + req.url))
   }
   else if (req.method == "POST") {
     let data = ""
