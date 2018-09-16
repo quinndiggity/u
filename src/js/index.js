@@ -1,7 +1,6 @@
 require('./util')
 require('./parse')
 require('./_raw')
-require('./_infix')
 require('./_prefix')
 require('./_assign')
 require('./envRoot')
